@@ -1,6 +1,7 @@
 BIN_DIR    ?= build
 BUILD_TYPE ?= Debug
 BUILD_DIR  ?= $(BIN_DIR)/$(BUILD_TYPE)
+$(shell echo ${BUILD_TYPE} > ${BIN_DIR}/last_build.txt)
 
 
 all: build test gcov_report
@@ -29,7 +30,7 @@ gcov_report: configure
 .PHONY: gcov_report
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf ${BIN_DIR}/$(shell cat ${BIN_DIR}/last_build.txt)
 fclean:
 	rm -rf $(BIN_DIR)
 .PHONY: clean fclean
