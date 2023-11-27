@@ -1,0 +1,40 @@
+---
+# Omit the std:: prefix for <cstdint> types, as the extra 5 characters do not 
+# merit the added clutter
+# - modernize-use-nodiscard -- There is no value to use this attribute for every function
+# - modernize-use-trailing-return-type -- Use the new trailing-return-type form 
+# only in cases where it's required or allows to write in a much more readable way
+# - bugprone-easily-swappable-parameters -- Adds additional complexity for simple functions
+# - cppcoreguidelines-pro-bounds-pointer-arithmetic -- The library is pretty low-level
+#  so we will use pointer arithmetic
+Checks: >
+  cppcoreguidelines-*,
+  clang-diagnostic-*,
+  clang-analyzer-*,
+  readability-*,
+  portability-*,
+  performance-*,
+  modernize-*,
+  bugprone-*,
+  hicpp-*,
+  cert-*,
+  misc-*,
+  google-*,
+  underfined-*,
+  -modernize-use-nodiscard,
+  -modernize-use-trailing-return-type, 
+  -bugprone-easily-swappable-parameters,
+  -readability-avoid-const-params-in-decls,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -hicpp-braces-around-statements,
+  -google-readability-braces-around-statements,
+  -readability-braces-around-statements,
+WarningsAsErrors: true
+# HeaderFilterRegex: >
+#   "(src/headers).*\\.h$"
+CheckOptions:
+  - key:   readability-identifier-length.IgnoredParameterNames
+    value:   'i|j|k|a|b|n|v|p|m'
+  - key:   readability-identifier-length.IgnoredVariableNames
+    value:   'c|rc|r|c|m'
+...
